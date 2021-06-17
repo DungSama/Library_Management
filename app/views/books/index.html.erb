@@ -1,0 +1,44 @@
+<% if current_user.admin %>
+
+    <h1>Welcome ADMIN to Library </h1>
+
+<% else %>
+    <h1>Welcome <%= current_user.name %> to Library </h1>      
+<% end %>
+<h2>Featured books</h2>
+
+<div class="dropdown">
+    <button class="dropbtn">Dropdown 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>
+
+<h3 class="current-category"><%= params[:category] %></h3>
+
+<% if @books.count == 0 %>
+
+  <h1>There are no books currently in this category</h1>
+
+<% else %>  
+
+  <div class="row">
+
+    <% @books.each do |book| %>
+
+      <div class="col-md-3">
+        <a href="/books/<%= book.id %>">
+          <%= image_tag book.book_img.url(:book_index), class: "book" %>
+        </a>
+      </div>  
+
+    <% end %>
+
+  </div>
+  
+<% end %> 
+

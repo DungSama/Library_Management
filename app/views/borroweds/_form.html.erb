@@ -1,0 +1,4 @@
+<%= simple_form_for([@book, @book.borroweds.build]) do |f| %>
+  <%= f.input :borrowed_date %>
+  <%= f.button :submit, :class => "btn-custom2" %>
+<% end %>

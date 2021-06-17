@@ -1,0 +1,57 @@
+<% if borrowed.borrowed_days.blank? %>
+
+      <% status = 'Reading' %>
+
+    <% else %>
+      <% @pay_day = (borrowed.borrowed_days - borrowed.borrowed_date).to_i %>
+      
+      <% if @pay_day > 0 &&  @pay_day < 10 %>
+     
+         <% status = 'Paid' %>
+
+      <% else  %>
+
+      <% status = 'Out of date' %>
+
+    <% end %>
+
+<% end %>
+  
+  
+<div class="links btn-group">
+
+        <% if borrowed.user_id == current_user.id %>
+
+            <p class="review-rating"> Borrowed date: <%= borrowed.borrowed_date %></p>
+            <p class="review-comment">Borrowed days: <%= borrowed.borrowed_days %></p>
+            <p>Status:<%= status %></p>
+            <%= link_to "Return Book", edit_book_borrowed_path(borrowed.book, borrowed), class: "btn btn-custom" %>
+            <%= link_to "Delete", book_borrowed_path(borrowed.book, borrowed), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom" %>
+
+        <% end %>
+
+        <% if current_user.admin %>
+
+            <% @user = borrowed.user%>
+
+            <tr>
+              <th scope="row"></th>
+
+              <td><%= @user.name %></td>
+              <td><%= @user.email %></td>
+              <td><%= borrowed.borrowed_date %></td>
+              <td><%= borrowed.borrowed_days %></td>
+
+              <% if status == 'Out of date' %>
+                <td style="color:Tomato";><%= status %></td>
+              <% else %>
+                <td><%= status %></td>
+              <% end %>
+
+            </tr>
+
+        <% end %>
+
+</div>
+
+  
