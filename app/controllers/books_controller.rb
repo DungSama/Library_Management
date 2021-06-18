@@ -21,8 +21,8 @@
 
       if current_user.admin
 
-        @books = Book.joins(:borroweds).where("borroweds.user_id").uniq
-
+        @borroweds = Borrowed.joins(:user).where("borroweds.user_id")
+      	
       else
         @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id)
       end
@@ -37,7 +37,7 @@
     else
       @average_review = @book.reviews.average(:rating).round(2)
     end
-      @borroweds = @book.borroweds
+  
  
   end
 

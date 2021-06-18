@@ -1,26 +1,32 @@
-<div class="review">
-  <% if user_signed_in? %>
-        <% if current_user.admin &&  @borroweds.count != 0 %>
-
-          <h2>Table With Borrowed</h2>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">STT</th>
-                      <th scope="col">Borrower</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Borrowed date</th>
-                      <th scope="col">Borrowed days</th>
-                      <th scope="col">Status</th>
-                    </tr>
-                  </thead>
-              <% end %>
-                  <tbody>
-                    <%= render @borroweds %>
-                  </tbody>
-                  </table>
-
-
-  <% end %>             
-
+<div class="dropdown">
+  <h1 class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Table With Borrowed <span  class="caret"></span></h1>
+    
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Reading</a></li>
+    <li><a href="#">Paid</a></li>
+    <li><a href="#">Out of date</a></li>
+    
+  </ul>
 </div>
+          
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Book</th>
+      <th scope="col">Author</th>
+      <th scope="col">Borrower</th>
+      <th scope="col">Email</th>
+      <th scope="col">Borrowed date</th>
+      <th scope="col">Borrowed days</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @borroweds %>
+  </tbody>
+  </table>
+
+

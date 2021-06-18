@@ -2,8 +2,10 @@
 <html>
 <head>
   <title>Library Management</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -13,10 +15,12 @@
 
   <nav class="navbar navbar-default">
 
-    <div class="container">
 
-      <div class="navbar-header">
+    <div class="container">
+      <div class="navbar-header" >
+          <i class="fa fa-book" style="font-size:46px"></i>
         <%= link_to "Library Mangemrnt", root_path, class: "navbar-brand" %>
+
       </div>
 
       <ul class="nav navbar-nav">

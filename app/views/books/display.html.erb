@@ -1,3 +1,6 @@
-<h1> Borrowed Books</h1>
 
-<%= render 'list' %>
+<% if current_user.admin %>
+  <%= render partial: "borroweds/borrowed_list", locals: {borrowed: @borroweds} %>
+<% else %>
+  <%= render 'list' %>
+<% end %>

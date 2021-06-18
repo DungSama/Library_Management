@@ -41,8 +41,6 @@
           <span class="number-of-reviews">Based on <%= @book.reviews.count %> reviews</span>
           <p class="book-desc"><%= @book.description %></p>
 
-          <h4><%= render partial: "borroweds/borrowed_list", locals: {borrowed: @borroweds} %></h4>
-
         </div>
       </div>
 

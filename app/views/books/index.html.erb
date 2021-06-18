@@ -17,6 +17,10 @@
         <a href="/books/<%= book.id %>">
           <%= image_tag book.book_img.url(:book_index), class: "book" %>
         </a>
+        <div class="title">
+          <h4><b><%= book.title %></b></h4>
+          <p><%= book.author %></p>
+        </div>
       </div>  
 
     <% end %>
