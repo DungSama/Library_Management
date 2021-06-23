@@ -1,25 +1,26 @@
+
 <% if @books.count == 0 %>
 
-  <h1>There are no books currently in this borrowed </h1>
+  <h1>There are no books currently in this Borrowed</h1>
 
-  <% if borrowed.user_id == current_user.id %> %>  
+<% else %>  
 
-    <div class="row">
+  <div class="row">
 
-      <% @books.each do |book| %>
+    <% @books.each do |book| %>
 
-        <div class="col-md-3">
-          
-          <a href="/books/<%= book.id %>">
-            <%= image_tag book.book_img.url(:book_index), class: "book" %>
-          </a>
+      <div class="col-md-3">
+        <a href="/books/<%= book.id %>">
+          <%= image_tag book.book_img.url(:book_index), class: "book" %>
+        </a>
+        <div class="title">
+          <h4><b><%= book.title %></b></h4>
+          <p><%= book.author %></p>
+        </div>
+      </div>  
 
-        </div>  
-  <% else %>
-    
-  <% end %>
+    <% end %>
 
-    </div>
+  </div>
   
 <% end %> 
-

@@ -1,37 +1,11 @@
-<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories <span class="caret"></span></a>
-          
-          <ul class="dropdown-menu" role="menu">
-
-            <% Category.all.each do |category| %>
-
-              <li>
-                <%= link_to category.name, books_path(category: category.name), class: "link" %>
-              </li>
-              
-            <% end %>
-          </ul>
-        </li>
-
-
-
-
-        <div class="row">
-
-      <% @books.each do |book| %>
-
-        <div class="col-md-3">
-          <a href="/books/<%= book.id %>">
-            <%= image_tag book.book_img.url(:book_index), class: "book" %>
-          </a>
-        <div class="row">
-          
-            <p class="title is-4"><%= book.title %></p>
-            <p><%=book.author %></p>
-          </div>
-        </div>
-        </div>  
-
-      <% end %>
-
-    </div>
+<button class = "btn-custom" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Author
+    <span class="caret"></span>
+  </button>
+          <ul class="dropdown-menu2">
+             <% Book.all.each do |book| %>
+                  <li>
+                    <%= link_to book.author, books_path(author: book.author), class: "link" %>
+                  </li>
+              <% end %>
+          </ul> 

@@ -17,6 +17,7 @@ class BorrowedsController < ApplicationController
     
       @borrowed.book_id = @book.id
       @borrowed.user_id = current_user.id
+      @borrowed.status = 'Reading'
 
       if @borrowed.save
         redirect_to book_path(@book)
@@ -30,15 +31,24 @@ class BorrowedsController < ApplicationController
   end
 
   def update
+
     if @borrowed.update(borrowed_params)
 
-      if @borrowed.borrowed_days > @borrowed.borrowed_date
-        redirect_to book_path(@book)
-      end
+    	@pay_day = (@borrowed.borrowed_days - @borrowed.borrowed_date).to_i
+
+	    if @pay_day >= 0 && @pay_day <= 10
+
+	    	@borrowed.status = 'Paid'
+	    	
+	    	if @borrowed.save
+	      	
+	        redirect_to book_path(@book)
+	      end
 
     else
       render 'edit'
     end
+  end
   end
 
   def destroy

@@ -8,7 +8,12 @@
     else
       @category_id = Category.find_by(name: params[:category]).id
       @books = Book.where(:category_id => @category_id).order("created_at DESC")
+      
     end
+
+
+
+    
   end
 
   def search
@@ -20,11 +25,11 @@
     if user_signed_in?
 
       if current_user.admin
-
+		
         @borroweds = Borrowed.joins(:user).where("borroweds.user_id")
       	
       else
-        @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id)
+        @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).uniq
       end
 
     end

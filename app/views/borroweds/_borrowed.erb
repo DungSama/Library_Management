@@ -1,0 +1,46 @@
+
+<% if borrowed.user_id == current_user.id %>
+
+  <div class="review">
+
+    <p class="review-rating">Borrowed Date:  <%= borrowed.borrowed_date %></p>
+    <p class="review-comment">Borrowed Day:  <%= borrowed.borrowed_days %></p>
+   
+    <% if borrowed.status == 'Reading' %>
+      <p style="color: #90EE90">Status: <%= borrowed.status %></p>
+      <%= link_to "Return", edit_book_borrowed_path(borrowed.book, borrowed), class: "btn btn-custom" %>
+    <% elsif borrowed.status == 'Paid' %>
+      <p style="color: #FFD700">Status: <%= borrowed.status %></p>
+    <% else%> 
+      <p style="color:Tomato">Status: <%= borrowed.status %></p>
+    <% end %>
+  </div>  
+
+<% else %>
+  
+  
+<div class="links btn-group">
+
+            <% @user = borrowed.user %>
+            <% @book = borrowed.book %>
+
+            <tr>
+              <th scope="row"></th>
+              <td><%= @book.title %></td>
+              <td><%= @book.author %></td>
+              <td><%= @user.name %></td>
+              <td><%= @user.email %></td>
+              <td><%= borrowed.borrowed_date %></td>
+              <td><%= borrowed.borrowed_days %></td>
+
+              <% if borrowed.status == 'Out of date' %>
+                <td style="color:Tomato";><%= borrowed.status %></td>
+              <% else %>
+                <td><%= borrowed.status %></td>
+              <% end %>
+
+            </tr>
+
+
+</div>
+<% end %>
