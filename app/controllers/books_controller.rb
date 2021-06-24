@@ -10,8 +10,7 @@
       @books = Book.where(:category_id => @category_id).order("created_at DESC")
       
     end
-
-
+    @books = Book.paginate(page: params[:page], per_page: 8).order("created_at DESC")
 
     
   end
@@ -43,6 +42,10 @@
       @average_review = @book.reviews.average(:rating).round(2)
     end
   
+  	if @book.borroweds.blank?
+  		@status ='nil'
+  	end
+
  
   end
 

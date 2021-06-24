@@ -35,9 +35,10 @@ class BorrowedsController < ApplicationController
     if @borrowed.update(borrowed_params)
 
     	@pay_day = (@borrowed.borrowed_days - @borrowed.borrowed_date).to_i
+    	
 
 	    if @pay_day >= 0 && @pay_day <= 10
-
+	    	
 	    	@borrowed.status = 'Paid'
 	    	
 	    	if @borrowed.save

@@ -1,6 +1,5 @@
 
-<h2>Featured books</h2>
-
+<h2>Featured books</h2><br>
 
 <div class="links btn-group">
   
@@ -23,7 +22,6 @@
 
 
 <h4 class="current-category"><%= params[:category] %></h4>
-
 <% if @books.count == 0 %>
 
   <h1>There are no books currently in this category</h1>
@@ -31,6 +29,7 @@
 <% else %>  
 
   <div class="row">
+
 
     <% @books.each do |book| %>
 
@@ -46,6 +45,7 @@
 
     <% end %>
 
-  </div>
   
+  </div>
+<%= will_paginate @books %></p>
 <% end %> 
