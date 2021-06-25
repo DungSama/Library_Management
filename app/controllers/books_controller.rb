@@ -21,19 +21,38 @@
 
   def display
 
-    if user_signed_in?
-
       if current_user.admin
 		
         @borroweds = Borrowed.joins(:user).where("borroweds.user_id")
+
       	
       else
         @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).uniq
-      end
 
-    end
+      end
   end
-  
+
+  def reading
+  	  if current_user.admin
+  		@borroweds = Borrowed.joins(:user).where("borroweds.user_id").where('status LIKE ?', 'Reading')
+  		else
+        @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'Reading').uniq
+
+      end
+  end
+
+  def paid
+  	@borroweds = Borrowed.joins(:user).where("borroweds.user_id").where('status LIKE ?', 'Paid')
+  end
+
+	def out_of_date
+		if current_user.admin
+  	@borroweds = Borrowed.joins(:user).where("borroweds.user_id").where('status LIKE ?', 'Out_of_date')
+  	else
+        @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'Out_of_date').uniq
+     end
+  end
+
   def show
 
     if @book.reviews.blank?
@@ -42,9 +61,7 @@
       @average_review = @book.reviews.average(:rating).round(2)
     end
   
-  	if @book.borroweds.blank?
-  		@status ='nil'
-  	end
+  	
 
  
   end

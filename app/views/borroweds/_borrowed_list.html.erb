@@ -1,12 +1,12 @@
 <div class="dropdown">
   <h1 class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Table With Borrowed <span  class="caret"></span></h1>
-    
+    <br>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="/display?status=Paid">Reading</a></li>
-    <li><a href="#">Paid</a></li>
-    <li><a href="#">Out of date</a></li>
+    <li><%= link_to "Reading", reading_path %></li>
+    <li><%= link_to "Paid", paid_path %></li>
+    <li><%= link_to "Out of date", out_of_date_path %></li>
     
   </ul>
 </div>

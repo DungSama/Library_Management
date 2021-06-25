@@ -14,17 +14,17 @@
     <% elsif borrowed.status == 'Paid' %>
       <p style="color: Gold">Status: <%= borrowed.status %></p>
       <br>
-      <button type="button" class="btn btn-warning">
-      <%= link_to "Borrow books", new_book_borrowed_path(@book) %></button>
     <% else%>
       
-      <p style="color:Tomato">Status: <%= borrowed.status %></p>
+      <p style="color:Tomato">Status: <%= borrowed.status %></p><br>
+        <button type="button" class="btn btn-warning">
+       <%= link_to "Return", edit_book_borrowed_path(borrowed.book, borrowed) %></button>
     <% end %>
   </div>  
 
-<% else %>
-  
-  
+<% end%>
+
+<% if current_user.admin? %>   
 <div class="links btn-group">
 
   

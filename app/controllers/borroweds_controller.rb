@@ -27,6 +27,8 @@ class BorrowedsController < ApplicationController
       
   end
 
+  
+
   def edit
   end
 
@@ -36,20 +38,24 @@ class BorrowedsController < ApplicationController
 
     	@pay_day = (@borrowed.borrowed_days - @borrowed.borrowed_date).to_i
     	
+    	if @pay_day > 0
 
-	    if @pay_day >= 0 && @pay_day <= 10
-	    	
-	    	@borrowed.status = 'Paid'
-	    	
-	    	if @borrowed.save
-	      	
-	        redirect_to book_path(@book)
-	      end
+			    if @pay_day >= 0 && @pay_day <= 10
+			    	
+			    	@borrowed.status = 'Paid'
+			    else
+			    	@borrowed.status = 'Out of date'
+			    end
 
-    else
-      render 'edit'
-    end
-  end
+			    	if @borrowed.save
+			      	
+			        redirect_to book_path(@book)
+			      end
+
+	    else
+	      render 'edit'
+	    end
+  	end
   end
 
   def destroy

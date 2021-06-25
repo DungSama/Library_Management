@@ -2,7 +2,6 @@
 <h2>Featured books</h2><br>
 
 <div class="links btn-group">
-  
   <div class="dropdown">
 
   <button class = "btn-custom" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -17,7 +16,13 @@
               <% end %>
           </ul>
 
-    </div>
+    </div><br>
+    <% if user_signed_in? %>
+      <% if !current_user.admin %>
+        <%= link_to "Reading", reading_path,  class: "btn btn-custom" %>
+      <% end %>
+        <%= link_to "Out of date", out_of_date_path,  class: "btn btn-custom" %>
+    <% end %>
 </div>
 
 
