@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   get 'paid', to: 'books#paid'
   get 'out_of_date', to: 'books#out_of_date'
   get 'about_to_expire', to: 'books#about_to_expire'
+  get 'unread', to: 'books#unread'
  
 end

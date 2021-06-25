@@ -69,6 +69,14 @@
      
   end
 
+  def unread
+  	@book  = Book.all
+  	@book_borroweds = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).uniq
+  	@books = (@book - @book_borroweds)
+  	@books = Book.paginate(page: params[:page], per_page: 8).order("created_at DESC")
+ 
+  end
+
   def show
 
     if @book.reviews.blank?

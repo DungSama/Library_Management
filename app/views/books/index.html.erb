@@ -30,10 +30,12 @@
 
     </div><br>
     <% if user_signed_in? %>
+      <%= link_to "Out of date", out_of_date_path,  class: "btn btn-custom" %>
       <% if !current_user.admin %>
         <%= link_to "Reading", reading_path,  class: "btn btn-custom" %>
+        <%= link_to "Unread", unread_path,  class: "btn btn-custom" %>
       <% end %>
-        <%= link_to "Out of date", out_of_date_path,  class: "btn btn-custom" %>
+        
     <% end %>
 </div>
 
