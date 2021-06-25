@@ -14,11 +14,21 @@
     <% elsif borrowed.status == 'Paid' %>
       <p style="color: Gold">Status: <%= borrowed.status %></p>
       <br>
+     <% elsif borrowed.status == 'About to expire' %> 
+      <p style="color: #7FFF00">Status: <%= borrowed.status %></p>
+      <button type="button" class="btn btn-warning">
+       <%= link_to "Return", edit_book_borrowed_path(borrowed.book, borrowed) %></button>
     <% else%>
       
-      <p style="color:Tomato">Status: <%= borrowed.status %></p><br>
-        <button type="button" class="btn btn-warning">
-       <%= link_to "Return", edit_book_borrowed_path(borrowed.book, borrowed) %></button>
+      <p style="color:Tomato">Status: <%= borrowed.status %><br>
+        Debt: <%= borrowed.debt %>$
+      </p><br>
+
+        <% if borrowed.borrowed_days.blank? %>
+          <button type="button" class="btn btn-warning">
+
+         <%= link_to "Return", edit_book_borrowed_path(borrowed.book, borrowed) %></button>
+         <% end %>
     <% end %>
   </div>  
 
@@ -42,6 +52,7 @@
 
               <% if borrowed.status == 'Out of date' %>
                 <td style="color:Tomato";><%= borrowed.status %></td>
+                <td><%= borrowed.debt %> $</td>
               <% else %>
                 <td><%= borrowed.status %></td>
               <% end %>

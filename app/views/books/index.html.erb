@@ -1,7 +1,19 @@
+<% if !user_signed_in? || current_user.admin?%>
 
-<h2>Featured books</h2><br>
+  <h1>Wecome to Library</h1>
 
+<% else %>
+
+<div class="nav navbar-nav navbar-right">
+    
+    <h1>Wecome <i><%=current_user.name %></i> to Library</h1>
+      <h4 >You have <%= @book.count %> book <u><%= link_to " about to expire", about_to_expire_path %></u></h4>
+</div>
+<% end %>
+
+<h3>Featured books</h3>
 <div class="links btn-group">
+
   <div class="dropdown">
 
   <button class = "btn-custom" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

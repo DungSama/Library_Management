@@ -3,16 +3,24 @@
   before_action :authenticate_user!, only: [:new, :edit, :show]
 
   def index
+
     if params[:category].blank?
       @books = Book.all.order("created_at DESC")
     else
       @category_id = Category.find_by(name: params[:category]).id
       @books = Book.where(:category_id => @category_id).order("created_at DESC")
-      
     end
     @books = Book.paginate(page: params[:page], per_page: 8).order("created_at DESC")
 
-    
+    if user_signed_in?
+	    @book = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'About_to_expire').uniq
+
+    	@count = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'Out_of_date').uniq.count
+
+	    if @count > 0
+	    	flash[:notice] = "You have #{@count} book Out of date "
+	    end
+  	end
   end
 
   def search
@@ -45,12 +53,20 @@
   	@borroweds = Borrowed.joins(:user).where("borroweds.user_id").where('status LIKE ?', 'Paid')
   end
 
+  def about_to_expire
+		
+    @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'about_to_expire').uniq
+  end
+
 	def out_of_date
-		if current_user.admin
-  	@borroweds = Borrowed.joins(:user).where("borroweds.user_id").where('status LIKE ?', 'Out_of_date')
-  	else
+		
+  			@borroweds = Borrowed.joins(:user).where("borroweds.user_id = ?", current_user.id).where('status LIKE ?', 'Out_of_date')
+
+  			@debt = @borroweds.map {|b| b.debt }.sum
+
+ 
         @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'Out_of_date').uniq
-     end
+     
   end
 
   def show
@@ -60,17 +76,12 @@
     else
       @average_review = @book.reviews.average(:rating).round(2)
     end
-  
-  	
+    
+end
 
- 
-  end
-
-  def new
-
-    @book = current_user.books.build
+	def new
+    @book = Book.new
     @categories = Category.all.map{ |c| [c.name, c.id] }
-
   end
 
   def create

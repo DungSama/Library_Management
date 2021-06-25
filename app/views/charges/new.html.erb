@@ -1,10 +1,4 @@
-<% if current_user.admin %>
-  <%= render partial: 'borroweds/borrowed_list', locals: {borrowed: @borroweds} %>
-  
-<% else %>
-  <% if @debt > 0 %>
-  <h3 style="color:tomato;"> You need to pay "<%= @debt %> the  fine" </h3>
-  
+<%= form_tag charges_path do %>
     <article>
       <% if flash[:error].present? %>
         <div id="error_explanation">
@@ -21,8 +15,4 @@
             data-description="A month's subscription"
             data-amount="500"
             data-locale="auto"></script>
-  <%= render  'list' %>
-  <% else %>
-   <h2 style="color: Tomato">There are no books currently in this Borrowed</h2>
-  <% end %>
 <% end %>
