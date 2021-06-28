@@ -1,3 +1,4 @@
+<%= link_to "Back", root_path, class: "btn btn-custom" %>
 <% if current_user.admin? %>
   <%= render partial: 'borroweds/borrowed_list', locals: {borrowed: @borroweds} %>
   

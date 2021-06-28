@@ -6,12 +6,14 @@
 
     if params[:category].blank?
       @books = Book.all.order("created_at DESC")
+       @books = Book.paginate(page: params[:page], per_page: 8).order("created_at DESC")
+
     else
       @category_id = Category.find_by(name: params[:category]).id
-      @books = Book.where(:category_id => @category_id).order("created_at DESC")
+      @books = Book.where(:category_id => @category_id).paginate(page: params[:page], per_page: 8).order("created_at DESC")
+     
     end
-    @books = Book.paginate(page: params[:page], per_page: 8).order("created_at DESC")
-
+    
     if user_signed_in?
 	    @book = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'About_to_expire').uniq
 
@@ -92,8 +94,8 @@
       @average_review = @book.reviews.average(:rating).round(2)
     end
 
-   
-end
+    @reading = Borrowed.where(user_id: current_user.id, book_id: @book.id, status: ['Reading', 'Out of date'])
+	end
 
 	def new
     @book = Book.new
