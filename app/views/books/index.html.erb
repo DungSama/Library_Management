@@ -7,11 +7,13 @@
 <div class="nav navbar-nav navbar-right">
     
     <h1>Wecome <i><%=current_user.name %></i> to Library</h1>
-      <h4 >You have <%= @book.count %> book <u><%= link_to " about to expire", about_to_expire_path %></u></h4>
+      <% if @book.count > 0 %>
+        <h4 >You have <%= @book.count %> book <u><%= link_to " about to expire", about_to_expire_path %></u></h4>
+      <% end %>
 </div>
 <% end %>
 
-<h3>Featured books</h3>
+
 <div class="links btn-group">
 
   <div class="dropdown">
@@ -38,7 +40,7 @@
         
     <% end %>
 </div>
-
+<h3>Featured books</h3>
 
 <h4 class="current-category"><%= params[:category] %></h4>
 <% if @books.count == 0 %>

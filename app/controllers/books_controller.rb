@@ -25,6 +25,11 @@
 
   def search
     @books = Book.where("title LIKE ?", "%" + params[:q] + "%")
+  end 
+
+
+  def search_author
+  	 @books = Book.where("author LIKE ?", "%" + params[:q] + "%")
   end
 
   def display
@@ -59,22 +64,24 @@
   end
 
 	def out_of_date
-		
+			if current_user.admin
+				@borroweds = Borrowed.joins(:user).where("borroweds.user_id").where('status LIKE ?', 'Out_of_date')
+			else
+
   			@borroweds = Borrowed.joins(:user).where("borroweds.user_id = ?", current_user.id).where('status LIKE ?', 'Out_of_date')
 
   			@debt = @borroweds.map {|b| b.debt }.sum
 
  
         @books = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).where('borroweds.status LIKE ?', 'Out_of_date').uniq
-     
+     end
   end
 
   def unread
   	@book  = Book.all
-  	@book_borroweds = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id).uniq
+  	@book_borroweds = Book.joins(:borroweds).where("borroweds.user_id = ?", current_user.id)
   	@books = (@book - @book_borroweds)
-  	@books = Book.paginate(page: params[:page], per_page: 8).order("created_at DESC")
- 
+  	@pading = @books.paginate(page: params[:page], per_page: 8)
   end
 
   def show
@@ -84,7 +91,8 @@
     else
       @average_review = @book.reviews.average(:rating).round(2)
     end
-    
+
+   
 end
 
 	def new

@@ -1,9 +1,9 @@
-<% if current_user.admin %>
+<% if current_user.admin? %>
   <%= render partial: 'borroweds/borrowed_list', locals: {borrowed: @borroweds} %>
   
 <% else %>
   <% if @debt > 0 %>
-  <h3 style="color:tomato;"> You need to pay "<%= @debt %> the  fine" </h3>
+  <h3 style="color:tomato;"> You need to pay "<%= @debt %> $ the  fine" </h3>
   
     <article>
       <% if flash[:error].present? %>
