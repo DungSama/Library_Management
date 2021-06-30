@@ -30,10 +30,6 @@
   end 
 
 
-  def search_author
-  	 @books = Book.where("author LIKE ?", "%" + params[:q] + "%")
-  end
-
   def display
 
       if current_user.admin
