@@ -18,7 +18,7 @@
 
     <div style="right: -30px; " class="dropdown">
 
-    <button class = "btn-custom" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button  class = "btn-custom" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Category
       <span class="caret"></span>
     </button>
@@ -36,6 +36,7 @@
 
   
     <% if user_signed_in? %>
+      <%= link_to "Reserves Book", reserves_path, class: " btn-custom" %>
       <%= link_to "Out of date", out_of_date_path, class: " btn-custom" %>
       <% if !current_user.admin %>
        <%= link_to "Reading", reading_path, class: " btn-custom"  %>

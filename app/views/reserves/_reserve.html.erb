@@ -1,0 +1,42 @@
+<% if current_user.admin%>
+  <% @user = reserve.user %>
+  <tr> 
+        <th scope="row"></th>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= reserve.name %></td>        
+        <td><a href="<%= reserve.describe %>">Link wikipedia</a></td>
+        <td><%= link_to "Add Book", new_book_path %> | 
+          <button  type="button" class="btn btn-outline-warning">
+            <%= link_to "Refuse", "/refuse/#{reserve.id}", :method => :patch %> 
+          </button>
+            
+        </td>
+        <% if reserve.request =='Request' %>
+          <td style="color:Tomato"><%= reserve.request %></td>
+        <% elsif reserve.request =='Added'%>
+          <td style="color:Green;"><%= reserve.request %></td>
+        <% else %>
+          <td style="color:Gold;"><%= reserve.request %></td>
+        <% end %>
+  </tr>
+<% end %>
+
+<% if reserve.user_id == current_user.id %>
+
+  <tr>
+        <th scope="row"></th>
+        <td><%= reserve.name %></td>
+        <td><%= reserve.author %></td>
+        <td><%= reserve.category %></td>
+        <td><%= reserve.publish %></td>
+        <td><%= reserve.describe%></td>
+        <% if reserve.request =='Request' %>
+          <td style="color:Tomato"><%= reserve.request %></td>
+        <% else %>
+          <td style="color:Gold;"><%= reserve.request %></td>
+        <% end %>
+        <td><%= link_to "Delete", reserve, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom" %>
+        </td>
+  </tr>
+<% end %>

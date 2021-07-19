@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
 	resources :searches	
   resources :charges
-  
+  resources :reserves
+
   root'books#index'
   get 'search', to: 'books#search'
   get 'display', to: 'books#display'
@@ -16,5 +17,5 @@ Rails.application.routes.draw do
   get 'out_of_date', to: 'books#out_of_date'
   get 'about_to_expire', to: 'books#about_to_expire'
   get 'unread', to: 'books#unread'
- 
+ 	patch 'refuse/:id', to: 'reserves#refuse'
 end

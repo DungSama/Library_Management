@@ -1,0 +1,8 @@
+<%= simple_form_for @reserves do |f| %>
+  <%= f.input :name, label: 'Book Title' %>
+  <%= f.input :author %>
+  <%= f.input :category %>
+  <%= f.input :publish %>
+  <%= f.input :describe,label: 'describe(link wikipedia)' %>
+  <%= f.button :submit %>
+<% end %>

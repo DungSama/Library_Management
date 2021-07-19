@@ -1,0 +1,51 @@
+<h1>Requested Book</h1><br><br>
+
+<% if current_user.admin %>
+    <% if !@reserves.blank? %>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">User</th>
+            <th scope="col">Email</th>
+            <th scope="col">Book</th>
+            <th scope="col">Describe</th>
+            <th scope="col">Add Book</th>
+            <th scope="col">Request</th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+         <%= render @reserves %>
+        </tbody>
+      </table>
+    <% end %>
+<% else %>
+  
+  <% if @reserves.blank? %>
+    <%= link_to "Reserves Book", new_reserf_path, class: " btn-custom" %>
+  <% else %>
+  <%= link_to "Reserves Book", new_reserf_path, class: " btn-custom" %>
+  <br><br/>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Categoty</th>
+        <th scope="col">Publish</th>
+        <th scope="col">Describe</th>
+        <th scope="col">Request</th>
+        <th scope="col">Delete</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+     <%= render @reserves %>
+    </tbody>
+  </table>
+  <% end %>
+<% end %>
